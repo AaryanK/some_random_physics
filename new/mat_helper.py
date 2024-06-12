@@ -11,6 +11,8 @@ class Hists_Graph():
     def add(self,x,color=None):
         # Create a histogram with 200 bins
         plt.hist(x,histtype="step",bins=100,color=color)   
+        plt.xlim(-2000, 2000)
+        plt.ylim(0, 400)
 
     def finish(self,f):
         
