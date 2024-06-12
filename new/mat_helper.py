@@ -8,9 +8,9 @@ class Hists_Graph():
         plt.xlabel(x)
         plt.ylabel(y)
 
-    def add(self,x):
+    def add(self,x,color=None):
         # Create a histogram with 200 bins
-        plt.hist(x,histtype="step")   
+        plt.hist(x,histtype="step",bins=100,color=color)   
 
     def finish(self,f):
         
