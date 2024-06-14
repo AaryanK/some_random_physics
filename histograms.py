@@ -130,6 +130,7 @@ def run(c, truth, f,outfilename, nmax=-1):
     amuon_signed_distances = []
     muon_correct_charge = [[],[]]
     amuon_correct_charge = [[],[]]
+    
 
     # Now loop over all events
     for i, event in enumerate(c):

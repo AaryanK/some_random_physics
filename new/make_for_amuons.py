@@ -11,7 +11,7 @@ with open("python_object.sushil_dai", 'rb') as file:
 
 amuon_graph = Hists_Graph("hist_signed_distance_antimuon", "Antimuons signed distance: (x_extropolate - x_truth) (using truth_info) ;True signed distance(mm); Number of antimuons")
 indexes = ['0p0T','0p9T','1p0T','1p1T','2p0T']
-blue_colors = matplotlib.cm.Blues(np.linspace(0.2, 1, 5))
+blue_colors = matplotlib.cm.Blues(np.linspace(0.5, 1, 5))
 
 amuon_names=[]
 for i in loaded_data['AMUONS']:
