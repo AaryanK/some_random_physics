@@ -8,18 +8,16 @@ class Hists_Graph():
         plt.xlabel(x)
         plt.ylabel(y)
 
-    def add(self,x,color=None):
+    def add(self,x,color=None,ylim=None):
         # Create a histogram with 200 bins
         plt.hist(x,histtype="step",bins=100,color=color)   
         # plt.hist(x,bins=100,color=color)   
-        plt.xlim(-2000, 2000)
-        # plt.ylim(0, 400)
+        # plt.xlim(-2000, 2000)
 
     def scatter(self,x,y,color=None):
         plt.scatter(x,y)
         
     def finish(self,f):
-        
         plt.legend(f,loc="upper right")
     
     def add_plot(self,x,y):
@@ -29,6 +27,5 @@ class Hists_Graph():
     def save(self,f):
         plt.savefig(f)
 
-
-
-        
+    def step(self,x,y):
+        plt.step(x, y, where='mid', label='Efficiency',bins=100)

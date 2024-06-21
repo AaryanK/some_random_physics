@@ -1,39 +1,43 @@
-import matplotlib.pyplot as plt
 import numpy as np
-import matplotlib.cm as cm
+import matplotlib.pyplot as plt
 
-# Example data
-x = np.linspace(0, 10, 100)
-y1 = np.sin(x)
-y2 = np.cos(x)
-y3 = np.tan(x)
-y4 = np.sin(2 * x)
+# Sample data
+list1 =np.random.rand(8)
+list2 =np.random.rand(10)
+list3 = np.divide(list1,list2)
+print(list1)
+print(list2)
+print(list3)
+# list2 = [1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4]
 
-# Number of datasets
-n_datasets = 4
+# Create histograms
+hist1, bin_edges1 = np.histogram(list1, bins=4)
+hist2, bin_edges2 = np.histogram(list2, bins=4)
 
-# Create a range of colors from the 'Blues' colormap
-colors_red = cm.Reds(np.linspace(0.2, 1, n_datasets))
-colors_blue = cm.Blues(np.linspace(0.2, 1, n_datasets))
+# Element-wise division of histograms
+hist_division = np.divide(hist1, hist2, out=np.zeros_like(hist1, dtype=float), where=hist2!=0)
 
-# Plot the datasets with different shades of red and blue
-plt.figure(figsize=(10, 6))
+# Plotting the histograms
+fig, axs = plt.subplots(3, 1, figsize=(10, 8))
 
-# Plot red datasets
-plt.plot(x, y1, label='sin(x) - Red', color=colors_red[0])
-plt.plot(x, y2, label='cos(x) - Red', color=colors_red[1])
+# Plot histogram 1
+axs[0].plot(list1)
+axs[0].set_title('Histogram 1')
+axs[0].set_xlabel('Bins')
+axs[0].set_ylabel('Counts')
 
-# Plot blue datasets
-plt.plot(x, y3, label='tan(x) - Blue', color=colors_blue[0])
-plt.plot(x, y4, label='sin(2x) - Blue', color=colors_blue[1])
+# Plot histogram 2
+axs[1].plot(list2)
+axs[1].set_title('Histogram 2')
+axs[1].set_xlabel('Bins')
+axs[1].set_ylabel('Counts')
 
-# Adding labels and title
-plt.xlabel('x')
-plt.ylabel('y')
-plt.title('Different Shades of Red and Blue for Different Datasets')
+# Plot divided histogram
+# We use the bin edges from the first histogram for consistency
+axs[2].plot(list3)
+axs[2].set_title('Divided Histogram (Histogram 1 / Histogram 2)')
+axs[2].set_xlabel('Bins')
+axs[2].set_ylabel('Division Result')
 
-# Adding legend
-plt.legend()
-
-# Show the plot
+plt.tight_layout()
 plt.show()
