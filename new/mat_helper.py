@@ -14,6 +14,10 @@ class Hists_Graph():
         # plt.hist(x,bins=100,color=color)   
         # plt.xlim(-2000, 2000)
 
+    def make_bar(self,bin_centers,hist_ratio,width):
+        plt.step(bin_centers, hist_ratio, where='mid',linestyle="-")
+
+
     def scatter(self,x,y,color=None):
         plt.scatter(x,y)
         
