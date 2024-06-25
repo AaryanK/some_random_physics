@@ -18,7 +18,7 @@ num_colors = 7
 # red_colors = [mcolors.to_hex((i/num_colors, 0, 0)) for i in range(num_colors)]
 # red_colors = [mcolors.to_hex((1, i/(num_), i/(num_colors-1))) for i in range(num_colors,0,-1)]
 # red_colors = [mcolors.to_hex((i/num_colors,0,0)) for i in range(num_colors,0,-1)]
-alpha_colors = np.linspace(0.7,1,num_colors)
+alpha_colors = np.linspace(0.5,1,num_colors)
 
 indexes = ['0p5T', '0p7T', '0p9T', '1p0T', '1p1T', '1p3T', '1p5T']
 muon_names=[]
