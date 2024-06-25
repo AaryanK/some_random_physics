@@ -1,43 +1,29 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
-# Sample data
-list1 =np.random.rand(8)
-list2 =np.random.rand(10)
-list3 = np.divide(list1,list2)
-print(list1)
-print(list2)
-print(list3)
-# list2 = [1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4]
+# Generate some example data
+data1 = np.random.rand(10, 12)  # Random data for first heatmap
+data2 = np.random.rand(10, 12)  # Random data for second heatmap
 
-# Create histograms
-hist1, bin_edges1 = np.histogram(list1, bins=4)
-hist2, bin_edges2 = np.histogram(list2, bins=4)
+# Create a figure with subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
 
-# Element-wise division of histograms
-hist_division = np.divide(hist1, hist2, out=np.zeros_like(hist1, dtype=float), where=hist2!=0)
+# Plot the first heatmap (blue colormap)
+heatmap1 = ax1.imshow(data1, cmap='Blues')
+ax1.set_title('Heatmap 1 (Blue Colormap)')
+ax1.set_xlabel('X axis')
+ax1.set_ylabel('Y axis')
+fig.colorbar(heatmap1, ax=ax1, orientation='vertical')
 
-# Plotting the histograms
-fig, axs = plt.subplots(3, 1, figsize=(10, 8))
+# Plot the second heatmap (red colormap)
+heatmap2 = ax2.imshow(data2, cmap='Reds')
+ax2.set_title('Heatmap 2 (Red Colormap)')
+ax2.set_xlabel('X axis')
+ax2.set_ylabel('Y axis')
+fig.colorbar(heatmap2, ax=ax2, orientation='vertical')
 
-# Plot histogram 1
-axs[0].plot(list1)
-axs[0].set_title('Histogram 1')
-axs[0].set_xlabel('Bins')
-axs[0].set_ylabel('Counts')
-
-# Plot histogram 2
-axs[1].plot(list2)
-axs[1].set_title('Histogram 2')
-axs[1].set_xlabel('Bins')
-axs[1].set_ylabel('Counts')
-
-# Plot divided histogram
-# We use the bin edges from the first histogram for consistency
-axs[2].plot(list3)
-axs[2].set_title('Divided Histogram (Histogram 1 / Histogram 2)')
-axs[2].set_xlabel('Bins')
-axs[2].set_ylabel('Division Result')
-
+# Adjust layout to prevent overlap
 plt.tight_layout()
+
+# Display the plot
 plt.show()

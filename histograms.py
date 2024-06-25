@@ -132,6 +132,14 @@ def run(c, truth, f,outfilename, nmax=-1):
     total_muon_ke = []
     correct_amuon_ke = []
     total_amuon_ke = []
+    correct_muon_TMS = []
+    total_muon_TMS = []
+    total_amuon_TMS = []
+    correct_amuon_ne=[]
+    correct_muon_ne = []
+    total_muon_ne = []
+    correct_amuon_ne = []
+    total_amuon_ne = []
 
 
     # Now loop over all events
@@ -146,7 +154,6 @@ def run(c, truth, f,outfilename, nmax=-1):
         
         # use PositionTMSStart, MomentumTMSStart, and PositionTMSEnd, truth level study
         for index, particle in enumerate(truth.PDG):
-            print(i)
             signed_dist=None
             if truth.PDG[index] == 13:
                 n_true_muons+=1
@@ -180,9 +187,13 @@ def run(c, truth, f,outfilename, nmax=-1):
                         b= x_start_tms-m*z_start_tms
                         x_extrapolate =m*z_end +b
                         signed_dist = x_end - x_extrapolate
+                        # total_muon_TMS.append(truth.TMS)
+                        # total_muon_ne.append(NeutrinoEnergy)
                         total_muon_ke.append(truth.Muon_TrueKE)
                         if signed_dist > 0 :
                             correct_muon_ke.append(truth.Muon_TrueKE)
+                            # correct_muon_TMS.append(truth.TMS)
+                            # correct_muon_ne.append(NeutrinoEnergy)
                             n_correct+=1
                             # n_correct+=1
 
@@ -196,8 +207,14 @@ def run(c, truth, f,outfilename, nmax=-1):
                         x_extrapolate =m*z_end +b
                         signed_dist = -(x_end - x_extrapolate)
                         total_muon_ke.append(truth.Muon_TrueKE)
+                        # total_muon_TMS.append(truth.TMS)
+                        # total_muon_ne.append(NeutrinoEnergy)
+                        print(truth.MomentumTMSStart)
+                        print(truth.NeutrinoEnergy)
                         if signed_dist > 0 :
                             correct_muon_ke.append(truth.Muon_TrueKE)
+                            # correct_muon_TMS.append(truth.TMS)
+                            # correct_muon_ne.append(NeutrinoEnergy)
                             n_correct+=1
 
                         
@@ -210,8 +227,12 @@ def run(c, truth, f,outfilename, nmax=-1):
                         x_extrapolate =m*z_end +b
                         signed_dist = x_end - x_extrapolate
                         total_muon_ke.append(truth.Muon_TrueKE)
+                        # total_muon_TMS.append(truth.TMS)
+                        # total_muon_ne.append(NeutrinoEnergy)
                         if signed_dist > 0 :
                             correct_muon_ke.append(truth.Muon_TrueKE)
+                            # correct_muon_TMS.append(truth.TMS)
+                            # correct_muon_ne.append(NeutrinoEnergy)
                             n_correct+=1
                         
                     if signed_dist!=None:
@@ -252,7 +273,11 @@ def run(c, truth, f,outfilename, nmax=-1):
                         x_extrapolate =m*z_end +b
                         signed_dist = x_end - x_extrapolate
                         total_amuon_ke.append(truth.Muon_TrueKE)
+                        # total_amuon_TMS.append(truth.TMS)
+                        # total_amuon_ne.append(NeutrinoEnergy)
                         if signed_dist > 0 :
+                            # correct_amuon_TMS.append(truth.TMS)
+                            # correct_amuon_ne.append(NeutrinoEnergy)
                             correct_amuon_ke.append(truth.Muon_TrueKE)
                             n_correct+=1
                         
@@ -266,7 +291,11 @@ def run(c, truth, f,outfilename, nmax=-1):
                         x_extrapolate =m*z_end +b
                         signed_dist = -(x_end - x_extrapolate)
                         total_amuon_ke.append(truth.Muon_TrueKE)
+                        # total_amuon_TMS.append(truth.TMS)
+                        # total_amuon_ne.append(NeutrinoEnergy)
                         if signed_dist > 0 :
+                            # correct_amuon_TMS.append(truth.TMS)
+                            # correct_amuon_ne.append(NeutrinoEnergy)
                             correct_amuon_ke.append(truth.Muon_TrueKE)
                             n_correct+=1
                         
@@ -282,7 +311,11 @@ def run(c, truth, f,outfilename, nmax=-1):
                         x_extrapolate =m*z_end +b
                         signed_dist = x_end - x_extrapolate
                         total_amuon_ke.append(truth.Muon_TrueKE)
+                        # total_amuon_TMS.append(truth.TMS)
+                        # total_amuon_ne.append(NeutrinoEnergy)
                         if signed_dist > 0 :
+                            # correct_amuon_TMS.append(truth.TMS)
+                            # correct_amuon_ne.append(NeutrinoEnergy)
                             correct_amuon_ke.append(truth.Muon_TrueKE)
                             n_correct+=1
                         

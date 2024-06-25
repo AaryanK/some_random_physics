@@ -6,7 +6,7 @@ from mat_helper import Hists_Graph
 
 
 
-with open("python_object_ultra_latest.sushil_dai", 'rb') as file:
+with open("python_object_lat_ultra.sushil_dai", 'rb') as file:
     loaded_data = pickle.load(file)
 
 amuon_graph = Hists_Graph("Anti-Muons Correct Charge Percent", "True Anti-Muon KE (Mev) ;True signed distance(mm); Fraction")
@@ -14,15 +14,15 @@ amuon_graph = Hists_Graph("Anti-Muons Correct Charge Percent", "True Anti-Muon K
 amuon_names=[]
 for i in loaded_data['AMUONS']:
     filtered_name = i.split("_")[-1].split(".")[0]
-    num,den = np.array(loaded_data['AMUONS_CORRECT'][i][0]),np.array(loaded_data['AMUONS_CORRECT'][i][1])
-    # print(num/den)
-    bins = np.linspace(0, 10000, 100)  # 100 bins from -5 to 5
+    # num,den = np.array(loaded_data['AMUONS_CORRECT'][i][0]),np.array(loaded_data['AMUONS_CORRECT'][i][1])
+    # # print(num/den)
+    # bins = np.linspace(0, 10000, 100)  # 100 bins from -5 to 5
     
-    hist1, bin_edges1 = np.histogram(num, bins=bins)
-    hist2, bin_edges2 = np.histogram(den, bins=bins)
-    bin_centers = (bin_edges1[:-1] + bin_edges1[1:]) / 2
-    hist_ratio = np.divide(hist1, hist2, out=np.zeros_like(hist1, dtype=float), where=hist2 != 0)
-    amuon_graph.make_bar(bin_centers, hist_ratio, width=bin_edges1[1] - bin_edges1[0])
+    # hist1, bin_edges1 = np.histogram(num, bins=bins)
+    # hist2, bin_edges2 = np.histogram(den, bins=bins)
+    # bin_centers = (bin_edges1[:-1] + bin_edges1[1:]) / 2
+    # hist_ratio = np.divide(hist1, hist2, out=np.zeros_like(hist1, dtype=float), where=hist2 != 0)
+    # amuon_graph.make_bar(bin_centers, hist_ratio, width=bin_edges1[1] - bin_edges1[0],)
 
 
     # print(max(loaded_data['AMUONS_CORRECT'][i][1]))
@@ -45,5 +45,6 @@ for i in loaded_data['AMUONS']:
 #     # amuon_graph.add(loaded_data['AMUONS_CORRECT'][i][0],loaded_data['AMUONS_CORRECT'][i][1])
 #     amuon_graph.add_plot(loaded_data['AMUONS_CORRECT'][i][0],loaded_data['AMUONS_CORRECT'][i][1])
     amuon_names.append(filtered_name)
-amuon_graph.finish(amuon_names)
-amuon_graph.save("Amuons_Correct.jpg")
+# amuon_graph.finish(amuon_names)
+# amuon_graph.save("Amuons_Correct.jpg")
+print(amuon_names)
