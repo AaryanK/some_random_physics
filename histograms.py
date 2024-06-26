@@ -130,14 +130,19 @@ def run(c, truth, f,outfilename, nmax=-1):
     amuon_signed_distances = []
     correct_muon_ke = []
     total_muon_ke = []
+
     correct_amuon_ke = []
     total_amuon_ke = []
+
     correct_muon_TMS = []
     total_muon_TMS = []
+
+    correct_amuon_TMS = []
     total_amuon_TMS = []
-    correct_amuon_ne=[]
+    
     correct_muon_ne = []
     total_muon_ne = []
+
     correct_amuon_ne = []
     total_amuon_ne = []
 
@@ -187,15 +192,17 @@ def run(c, truth, f,outfilename, nmax=-1):
                         b= x_start_tms-m*z_start_tms
                         x_extrapolate =m*z_end +b
                         signed_dist = x_end - x_extrapolate
-                        # total_muon_TMS.append(truth.TMS)
-                        # total_muon_ne.append(NeutrinoEnergy)
+                        NeutrinoEnergy = truth.NeutrinoP4[index+3]
+                        p = math.sqrt(truth.MomentumTMSStart[4*index]**2+truth.MomentumTMSStart[4*index+2]**2)
+                        total_muon_TMS.append(p)
+                        total_muon_ne.append(NeutrinoEnergy)
                         total_muon_ke.append(truth.Muon_TrueKE)
                         if signed_dist > 0 :
                             correct_muon_ke.append(truth.Muon_TrueKE)
-                            # correct_muon_TMS.append(truth.TMS)
-                            # correct_muon_ne.append(NeutrinoEnergy)
+                            correct_muon_TMS.append(p)
+                            correct_muon_ne.append(NeutrinoEnergy)
                             n_correct+=1
-                            # n_correct+=1
+                            n_correct+=1
 
 
                     if region2(x_start_tms) and region2(x_end):
@@ -206,15 +213,15 @@ def run(c, truth, f,outfilename, nmax=-1):
                         b= x_start_tms-m*z_start_tms
                         x_extrapolate =m*z_end +b
                         signed_dist = -(x_end - x_extrapolate)
+                        NeutrinoEnergy = truth.NeutrinoP4[index+3]
+                        p = math.sqrt(truth.MomentumTMSStart[4*index]**2+truth.MomentumTMSStart[4*index+2]**2)
                         total_muon_ke.append(truth.Muon_TrueKE)
-                        # total_muon_TMS.append(truth.TMS)
-                        # total_muon_ne.append(NeutrinoEnergy)
-                        print(truth.MomentumTMSStart)
-                        print(truth.NeutrinoEnergy)
+                        total_muon_TMS.append(p)
+                        total_muon_ne.append(NeutrinoEnergy)
                         if signed_dist > 0 :
                             correct_muon_ke.append(truth.Muon_TrueKE)
-                            # correct_muon_TMS.append(truth.TMS)
-                            # correct_muon_ne.append(NeutrinoEnergy)
+                            correct_muon_TMS.append(p)
+                            correct_muon_ne.append(NeutrinoEnergy)
                             n_correct+=1
 
                         
@@ -226,13 +233,15 @@ def run(c, truth, f,outfilename, nmax=-1):
                         b= x_start_tms-m*z_start_tms
                         x_extrapolate =m*z_end +b
                         signed_dist = x_end - x_extrapolate
+                        NeutrinoEnergy = truth.NeutrinoP4[index+3]
+                        p = math.sqrt(truth.MomentumTMSStart[4*index]**2+truth.MomentumTMSStart[4*index+2]**2)
                         total_muon_ke.append(truth.Muon_TrueKE)
-                        # total_muon_TMS.append(truth.TMS)
-                        # total_muon_ne.append(NeutrinoEnergy)
+                        total_muon_TMS.append(p)
+                        total_muon_ne.append(NeutrinoEnergy)
                         if signed_dist > 0 :
                             correct_muon_ke.append(truth.Muon_TrueKE)
-                            # correct_muon_TMS.append(truth.TMS)
-                            # correct_muon_ne.append(NeutrinoEnergy)
+                            correct_muon_TMS.append(p)
+                            correct_muon_ne.append(NeutrinoEnergy)
                             n_correct+=1
                         
                     if signed_dist!=None:
@@ -273,11 +282,11 @@ def run(c, truth, f,outfilename, nmax=-1):
                         x_extrapolate =m*z_end +b
                         signed_dist = x_end - x_extrapolate
                         total_amuon_ke.append(truth.Muon_TrueKE)
-                        # total_amuon_TMS.append(truth.TMS)
-                        # total_amuon_ne.append(NeutrinoEnergy)
+                        total_amuon_TMS.append(p)
+                        total_amuon_ne.append(NeutrinoEnergy)
                         if signed_dist > 0 :
-                            # correct_amuon_TMS.append(truth.TMS)
-                            # correct_amuon_ne.append(NeutrinoEnergy)
+                            correct_amuon_TMS.append(p)
+                            correct_amuon_ne.append(NeutrinoEnergy)
                             correct_amuon_ke.append(truth.Muon_TrueKE)
                             n_correct+=1
                         
@@ -290,12 +299,14 @@ def run(c, truth, f,outfilename, nmax=-1):
                         b= x_start_tms-m*z_start_tms
                         x_extrapolate =m*z_end +b
                         signed_dist = -(x_end - x_extrapolate)
+                        NeutrinoEnergy = truth.NeutrinoP4[index+3]
+                        p = p
                         total_amuon_ke.append(truth.Muon_TrueKE)
-                        # total_amuon_TMS.append(truth.TMS)
-                        # total_amuon_ne.append(NeutrinoEnergy)
+                        total_amuon_TMS.append(p)
+                        total_amuon_ne.append(NeutrinoEnergy)
                         if signed_dist > 0 :
-                            # correct_amuon_TMS.append(truth.TMS)
-                            # correct_amuon_ne.append(NeutrinoEnergy)
+                            correct_amuon_TMS.append(p)
+                            correct_amuon_ne.append(NeutrinoEnergy)
                             correct_amuon_ke.append(truth.Muon_TrueKE)
                             n_correct+=1
                         
@@ -310,12 +321,14 @@ def run(c, truth, f,outfilename, nmax=-1):
                         b= x_start_tms-m*z_start_tms
                         x_extrapolate =m*z_end +b
                         signed_dist = x_end - x_extrapolate
+                        NeutrinoEnergy = truth.NeutrinoP4[index+3]
+                        p = p
                         total_amuon_ke.append(truth.Muon_TrueKE)
-                        # total_amuon_TMS.append(truth.TMS)
-                        # total_amuon_ne.append(NeutrinoEnergy)
+                        total_amuon_TMS.append(p)
+                        total_amuon_ne.append(NeutrinoEnergy)
                         if signed_dist > 0 :
-                            # correct_amuon_TMS.append(truth.TMS)
-                            # correct_amuon_ne.append(NeutrinoEnergy)
+                            correct_amuon_TMS.append(p)
+                            correct_amuon_ne.append(NeutrinoEnergy)
                             correct_amuon_ke.append(truth.Muon_TrueKE)
                             n_correct+=1
                         
@@ -349,7 +362,7 @@ def run(c, truth, f,outfilename, nmax=-1):
 
 
     # Return this hists if the user requested previews
-    return muon_signed_distances,amuon_signed_distances,[correct_muon_ke,total_muon_ke],[correct_amuon_ke,total_amuon_ke]
+    return muon_signed_distances,amuon_signed_distances,[correct_muon_ke,total_muon_ke],[correct_amuon_ke,total_amuon_ke],[correct_muon_TMS,total_muon_TMS],[correct_amuon_TMS,total_amuon_TMS],[correct_muon_ne,total_muon_ne],[correct_amuon_ne,total_amuon_ne]
 
 
 def validate_then_run(args):
@@ -398,6 +411,11 @@ def validate_then_run(args):
     entire_array["AMUONS"] = {}
     entire_array["MUONS_CORRECT"]={}
     entire_array["AMUONS_CORRECT"]={}
+    entire_array["MUONS_CORRECT_TMS"] = {}
+    entire_array["AMUONS_CORRECT_TMS"]={}
+    entire_array["MUONS_CORRECT_NE"] = {}
+    entire_array["AMUONS_CORRECT_NE"]={}
+
     for f in files_to_use:
     # Make the TChain objects. One for truth information and one for reconstructed information.
         c = ROOT.TChain("Line_Candidates")
@@ -413,11 +431,15 @@ def validate_then_run(args):
         assert nevents >= -1, f"nevents <= -1, why? {nevents}"
 
         # Now finally run
-        muon_arr,amuon_arr,muon_correct_charge,amuon_correct_charge = run(c, truth,f, outfilename, nevents)
+        muon_arr,amuon_arr,muon_correct_charge,amuon_correct_charge,muon_correct_tms,amuon_correct_tms,muons_correct_ne,amuons_correct_ne = run(c, truth,f, outfilename, nevents)
         entire_array["MUONS"][f] = muon_arr
         entire_array["AMUONS"][f] = amuon_arr
         entire_array["MUONS_CORRECT"][f] = muon_correct_charge
         entire_array["AMUONS_CORRECT"][f] = amuon_correct_charge
+        entire_array["MUONS_CORRECT_TMS"][f] = muon_correct_tms
+        entire_array["AMUONS_CORRECT_TMS"][f]=amuon_correct_tms
+        entire_array["MUONS_CORRECT_NE"][f] = muons_correct_ne
+        entire_array["AMUONS_CORRECT_NE"][f]=amuons_correct_ne
 
 
         # muon_graph.add(muon_arr)
