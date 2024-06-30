@@ -8,9 +8,9 @@ class Hists_Graph():
         plt.xlabel(x)
         plt.ylabel(y)
 
-    def add(self,x,color=None,ylim=None):
+    def add(self,x,color=None,ylim=None,bins=None):
         # Create a histogram with 200 bins
-        plt.hist(x,histtype="step",bins=100,color=color)   
+        plt.hist(x,histtype="step",color=color,bins=bins)   
         # plt.hist(x,bins=100,color=color)   
         plt.xlim(-2000, 2000)
         
@@ -19,6 +19,8 @@ class Hists_Graph():
         plt.step(bin_centers, hist_ratio, where='mid',linestyle="-",color=color,alpha=alpha)
         # plt.ylim(0,1)
 
+    def show(self):
+        plt.show()
 
     def scatter(self,x,y,color=None):
         plt.scatter(x,y)

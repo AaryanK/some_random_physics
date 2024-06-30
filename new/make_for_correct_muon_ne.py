@@ -39,21 +39,18 @@ for i in loaded_data['AMUONS']:
     #     loaded_data['MUONS_CORRECT'][i][0][j + 1] = key
 
     num,den = np.array(loaded_data['MUONS_CORRECT_NE'][i][0]),np.array(loaded_data['MUONS_CORRECT_NE'][i][1])
-    # print(num[100:120],den[100:120])
-    # bins = np.linspace(500, 5000, 100)  # 100 bins from -5 to 5
-    hist1, bin_edges1 = np.histogram(num)
-    hist2, bin_edges2 = np.histogram(den)
-    # print(hist1)
-    # print("\n\n\n")
-    # print(bin_edges1)
+    bins = np.linspace(500, 5000, 100)  # 100 bins from -5 to 5
+    
+    hist1, bin_edges1 = np.histogram(num, bins=bins)
+    hist2, bin_edges2 = np.histogram(den, bins=bins)
     bin_centers = (bin_edges1[:-1] + bin_edges1[1:]) / 2
     hist_ratio = np.divide(hist1, hist2, out=np.zeros_like(hist1, dtype=float), where=hist2 != 0)
-    ind = indexes.index(filtered_name)
-    ind = 6
+    # ind = indexes.index(filtered_name)
+    # ind = 6
     muon_graph.make_bar(bin_centers, hist_ratio, width=bin_edges1[1] - bin_edges1[0],color="red",alpha=alpha_colors[ind])
 
-    # muon_graph.add(hist_ratio,bins=100)
+    # muon_graph.add(loaded_data['MUONS_CORRECT'][i][0])
     muon_names.append(filtered_name)
     print("passed")
 muon_graph.finish(muon_names)
-muon_graph.save("muons_Correct_ne_test.jpg")
+muon_graph.save("muons_Correct_ne.jpg")

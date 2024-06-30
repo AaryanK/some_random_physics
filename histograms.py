@@ -178,7 +178,11 @@ def run(c, truth, f,outfilename, nmax=-1):
                 x_lar_end = truth.PositionLArEnd[4*index+0]-FUDICIAL_CUT
                 y_lar_end = truth.PositionLArEnd[4*index+1]-FUDICIAL_CUT
                 z_lar_end = truth.PositionLArEnd[4*index+2]-FUDICIAL_CUT
-
+                # NeutrinoEnergy = truth.NeutrinoP4
+                # MomentumTMSStart = truth.MomentumTMSStart
+                # p_z = truth.MomentumTMSStart[4*index+2]
+                # p_x = truth.MomentumTMSStart[4*index+0]
+                # print(p_z,p_x,NeutrinoEnergy[3])
                 # p = Momentum(KE_muon,classification="muon")
                 
             
@@ -192,7 +196,7 @@ def run(c, truth, f,outfilename, nmax=-1):
                         b= x_start_tms-m*z_start_tms
                         x_extrapolate =m*z_end +b
                         signed_dist = x_end - x_extrapolate
-                        NeutrinoEnergy = truth.NeutrinoP4[index+3]
+                        NeutrinoEnergy = truth.NeutrinoP4[3]
                         p = math.sqrt(truth.MomentumTMSStart[4*index]**2+truth.MomentumTMSStart[4*index+2]**2)
                         total_muon_TMS.append(p)
                         total_muon_ne.append(NeutrinoEnergy)
@@ -213,7 +217,7 @@ def run(c, truth, f,outfilename, nmax=-1):
                         b= x_start_tms-m*z_start_tms
                         x_extrapolate =m*z_end +b
                         signed_dist = -(x_end - x_extrapolate)
-                        NeutrinoEnergy = truth.NeutrinoP4[index+3]
+                        NeutrinoEnergy = truth.NeutrinoP4[3]
                         p = math.sqrt(truth.MomentumTMSStart[4*index]**2+truth.MomentumTMSStart[4*index+2]**2)
                         total_muon_ke.append(truth.Muon_TrueKE)
                         total_muon_TMS.append(p)
@@ -233,7 +237,7 @@ def run(c, truth, f,outfilename, nmax=-1):
                         b= x_start_tms-m*z_start_tms
                         x_extrapolate =m*z_end +b
                         signed_dist = x_end - x_extrapolate
-                        NeutrinoEnergy = truth.NeutrinoP4[index+3]
+                        NeutrinoEnergy = truth.NeutrinoP4[3]
                         p = math.sqrt(truth.MomentumTMSStart[4*index]**2+truth.MomentumTMSStart[4*index+2]**2)
                         total_muon_ke.append(truth.Muon_TrueKE)
                         total_muon_TMS.append(p)
@@ -269,6 +273,10 @@ def run(c, truth, f,outfilename, nmax=-1):
                 x_lar_end = truth.PositionLArEnd[4*index+0]-FUDICIAL_CUT
                 y_lar_end = truth.PositionLArEnd[4*index+1]-FUDICIAL_CUT
                 z_lar_end = truth.PositionLArEnd[4*index+2]-FUDICIAL_CUT
+                # print(NeutrinoEnergy,MomentumTMSStart)
+                # p_z = truth.MomentumTMSStart[4*index+2]
+                # p_x = truth.MomentumTMSStart[4*index+0]
+                # print(p_z,p_x,NeutrinoEnergy[3])
 
                 
 
@@ -281,10 +289,12 @@ def run(c, truth, f,outfilename, nmax=-1):
                         b= x_start_tms-m*z_start_tms
                         x_extrapolate =m*z_end +b
                         signed_dist = x_end - x_extrapolate
+                        NeutrinoEnergy = truth.NeutrinoP4[3]
+                        p = math.sqrt(truth.MomentumTMSStart[4*index]**2+truth.MomentumTMSStart[4*index+2]**2)
                         total_amuon_ke.append(truth.Muon_TrueKE)
                         total_amuon_TMS.append(p)
                         total_amuon_ne.append(NeutrinoEnergy)
-                        if signed_dist > 0 :
+                        if signed_dist < 0 :
                             correct_amuon_TMS.append(p)
                             correct_amuon_ne.append(NeutrinoEnergy)
                             correct_amuon_ke.append(truth.Muon_TrueKE)
@@ -299,12 +309,12 @@ def run(c, truth, f,outfilename, nmax=-1):
                         b= x_start_tms-m*z_start_tms
                         x_extrapolate =m*z_end +b
                         signed_dist = -(x_end - x_extrapolate)
-                        NeutrinoEnergy = truth.NeutrinoP4[index+3]
-                        p = p
+                        NeutrinoEnergy = truth.NeutrinoP4[3]
+                        p = math.sqrt(truth.MomentumTMSStart[4*index]**2+truth.MomentumTMSStart[4*index+2]**2)
                         total_amuon_ke.append(truth.Muon_TrueKE)
                         total_amuon_TMS.append(p)
                         total_amuon_ne.append(NeutrinoEnergy)
-                        if signed_dist > 0 :
+                        if signed_dist < 0 :
                             correct_amuon_TMS.append(p)
                             correct_amuon_ne.append(NeutrinoEnergy)
                             correct_amuon_ke.append(truth.Muon_TrueKE)
@@ -321,12 +331,13 @@ def run(c, truth, f,outfilename, nmax=-1):
                         b= x_start_tms-m*z_start_tms
                         x_extrapolate =m*z_end +b
                         signed_dist = x_end - x_extrapolate
-                        NeutrinoEnergy = truth.NeutrinoP4[index+3]
-                        p = p
+                        NeutrinoEnergy = truth.NeutrinoP4[3]
+                        # NeutrinoEnergy = truth.NeutrinoP4[3]
+                        p = math.sqrt(truth.MomentumTMSStart[4*index]**2+truth.MomentumTMSStart[4*index+2]**2)
                         total_amuon_ke.append(truth.Muon_TrueKE)
                         total_amuon_TMS.append(p)
                         total_amuon_ne.append(NeutrinoEnergy)
-                        if signed_dist > 0 :
+                        if signed_dist < 0 :
                             correct_amuon_TMS.append(p)
                             correct_amuon_ne.append(NeutrinoEnergy)
                             correct_amuon_ke.append(truth.Muon_TrueKE)
