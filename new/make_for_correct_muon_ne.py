@@ -7,13 +7,13 @@ import matplotlib.colors as mcolors
 
 
 
-with open("python_object (13).sushil_dai", 'rb') as file:
+with open("python_object (14).sushil_dai", 'rb') as file:
     loaded_data = pickle.load(file)
 
 muon_graph = Hists_Graph("Muons Correct Neutrino Energy", "Neutrino Energy ;True signed distance(mm); Fraction")
 
 # red_colors = ['#FFCCCC', '#FF9999', '#FF6666', '#FF3333', '#FF0000']
-num_colors = 7
+num_colors = 9
 # red_colors = [mcolors.to_hex((1, i/num_colors, i/num_colors)) for i in range(num_colors)]
 # red_colors = [mcolors.to_hex((i/num_colors, 0, 0)) for i in range(num_colors)]
 # red_colors = [mcolors.to_hex((1, i/(num_), i/(num_colors-1))) for i in range(num_colors,0,-1)]
@@ -21,7 +21,7 @@ num_colors = 7
 alpha_colors = np.linspace(0.5,1,num_colors)
 
 # indexes = ['0p5T', '0p7T', '0p9T', '1p0T', '1p1T', '1p3T', '1p5T']
-indexes = ['0p0T','0p5T', '0p7T', '0p9T', '1p0T', '1p1T', '1p3T']
+indexes = ['0p0T','0p5T', '0p7T', '0p9T', '1p0T', '1p1T', '1p3T','1p5T','2p0T']
 
 muon_names=[]
 for i in loaded_data['AMUONS']:
@@ -45,7 +45,7 @@ for i in loaded_data['AMUONS']:
     hist2, bin_edges2 = np.histogram(den, bins=bins)
     bin_centers = (bin_edges1[:-1] + bin_edges1[1:]) / 2
     hist_ratio = np.divide(hist1, hist2, out=np.zeros_like(hist1, dtype=float), where=hist2 != 0)
-    # ind = indexes.index(filtered_name)
+    ind = indexes.index(filtered_name)
     # ind = 6
     muon_graph.make_bar(bin_centers, hist_ratio, width=bin_edges1[1] - bin_edges1[0],color="red",alpha=alpha_colors[ind])
 

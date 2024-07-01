@@ -13,14 +13,18 @@ with open("python_object_lat_ultra.sushil_dai", 'rb') as file:
 muon_graph = Hists_Graph("Muons Correct Charge Percent", "True Muon KE (Mev) ;True signed distance(mm); Fraction")
 
 # red_colors = ['#FFCCCC', '#FF9999', '#FF6666', '#FF3333', '#FF0000']
-num_colors = 7
+# red_colors = matplotlib.cm.Reds(np.linspace(0.5, 1, 9))
+
+num_colors = 9
 # red_colors = [mcolors.to_hex((1, i/num_colors, i/num_colors)) for i in range(num_colors)]
 # red_colors = [mcolors.to_hex((i/num_colors, 0, 0)) for i in range(num_colors)]
 # red_colors = [mcolors.to_hex((1, i/(num_), i/(num_colors-1))) for i in range(num_colors,0,-1)]
 # red_colors = [mcolors.to_hex((i/num_colors,0,0)) for i in range(num_colors,0,-1)]
 alpha_colors = np.linspace(0.5,1,num_colors)
 
-indexes = ['0p5T', '0p7T', '0p9T', '1p0T', '1p1T', '1p3T', '1p5T']
+# indexes = ['0p5T', '0p7T', '0p9T', '1p0T', '1p1T', '1p3T', '1p5T']
+indexes = ['0p0T','0p5T', '0p7T', '0p9T', '1p0T', '1p1T', '1p3T','1p5T','2p0T']
+
 muon_names=[]
 for i in loaded_data['AMUONS']:
     filtered_name = i.split("_")[-1].split(".")[0]

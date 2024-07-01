@@ -10,8 +10,10 @@ with open("python_object.sushil_dai", 'rb') as file:
     loaded_data = pickle.load(file)
 
 amuon_graph = Hists_Graph("hist_signed_distance_antimuon", "Antimuons signed distance: (x_extropolate - x_truth) (using truth_info) ;True signed distance(mm); Number of antimuons")
-indexes = ['0p0T','0p9T','1p0T','1p1T','2p0T']
-blue_colors = matplotlib.cm.Blues(np.linspace(0.5, 1, 5))
+# indexes = ['0p0T','0p9T','1p0T','1p1T','2p0T']
+indexes = ['0p0T','0p5T', '0p7T', '0p9T', '1p0T', '1p1T', '1p3T','1p5T','2p0T']
+
+blue_colors = matplotlib.cm.Blues(np.linspace(0.5, 1, 9))
 
 amuon_names=[]
 for i in loaded_data['AMUONS']:
