@@ -196,6 +196,8 @@ def run(c, truth, f,outfilename, nmax=-1):
                         b= x_start_tms-m*z_start_tms
                         x_extrapolate =m*z_end +b
                         signed_dist = x_end - x_extrapolate
+                        print(truth.NeutrinoP4[0],truth.NeutrinoP4[1],truth.NeutrinoP4[2],truth.NeutrinoP4[3])
+                        print(math.sqrt(truth.NeutrinoP4[0]**2+truth.NeutrinoP4[1]**2+truth.NeutrinoP4[2]**2+truth.NeutrinoP4[3]**2))
                         NeutrinoEnergy = truth.NeutrinoP4[3]
                         p = math.sqrt(truth.MomentumTMSStart[4*index]**2+truth.MomentumTMSStart[4*index+2]**2)
                         total_muon_TMS.append(p)
@@ -217,6 +219,8 @@ def run(c, truth, f,outfilename, nmax=-1):
                         b= x_start_tms-m*z_start_tms
                         x_extrapolate =m*z_end +b
                         signed_dist = -(x_end - x_extrapolate)
+                        print(truth.NeutrinoP4[0],truth.NeutrinoP4[1],truth.NeutrinoP4[2],truth.NeutrinoP4[3])
+                        print(math.sqrt(truth.NeutrinoP4[0]**2+truth.NeutrinoP4[1]**2+truth.NeutrinoP4[2]**2+truth.NeutrinoP4[3]**2))
                         NeutrinoEnergy = truth.NeutrinoP4[3]
                         p = math.sqrt(truth.MomentumTMSStart[4*index]**2+truth.MomentumTMSStart[4*index+2]**2)
                         total_muon_ke.append(truth.Muon_TrueKE)
@@ -237,6 +241,8 @@ def run(c, truth, f,outfilename, nmax=-1):
                         b= x_start_tms-m*z_start_tms
                         x_extrapolate =m*z_end +b
                         signed_dist = x_end - x_extrapolate
+                        print(truth.NeutrinoP4[0],truth.NeutrinoP4[1],truth.NeutrinoP4[2],truth.NeutrinoP4[3])
+                        print(math.sqrt(truth.NeutrinoP4[0]**2+truth.NeutrinoP4[1]**2+truth.NeutrinoP4[2]**2+truth.NeutrinoP4[3]**2))
                         NeutrinoEnergy = truth.NeutrinoP4[3]
                         p = math.sqrt(truth.MomentumTMSStart[4*index]**2+truth.MomentumTMSStart[4*index+2]**2)
                         total_muon_ke.append(truth.Muon_TrueKE)

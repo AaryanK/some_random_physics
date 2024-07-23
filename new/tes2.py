@@ -1,0 +1,94 @@
+import pickle
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+from mat_helper import Hists_Graph
+import matplotlib.colors as mcolors
+import math
+
+# Define muon mass and fiducial cuts
+MUON_MASS = 105.7  # MeV/c^2
+FUDICIAL_CUT = 50
+LAR_START = (-3478.48, -2166.71, 4179.24)
+LAR_END = (3478.48, 829.282, 9135.88)
+
+
+
+class Momentum:
+    def __init__(self, kinetic_energy, classification="muon"):
+        self.ke = kinetic_energy
+        self.classification = classification
+        self.ranges = [(0, 1000), (1000, 2000), (2000, 3000), (3000, 4000), (4000, 5000)]
+
+    def momentum_from_kinetic_energy(self, ke):
+        return math.sqrt((ke + MUON_MASS) ** 2 - MUON_MASS ** 2)
+
+    def get_range_index(self):
+        for i, r in enumerate(self.ranges):
+            if r[0] <= self.ke <= r[1]:
+                return i
+        return None
+
+def inside_tms(x, y, z):
+    return -3500 < x < 3500 and -3700 < y < 1000 and 11000 < z < 18200
+
+def inside_lar(x, y, z):
+    return -4500 < x < 3700 and -3200 < y < 1000 and 4100 < z < 9200
+
+def region1(x):
+    return -4000 < x < -2500
+
+def region2(x):
+    return -1500 < x < 1500
+
+def region3(x):
+    return 2500 < x < 4000
+
+with open("python_object (17).sushil_dai", 'rb') as file:
+    loaded_data = pickle.load(file)
+
+# muon_graph = Hists_Graph("Muons Correct TMS", "TMSMomentumStart ;True signed distance(mm); Fraction")
+# num_colors = 10
+indexes = ['0p0T','0p5T', '0p7T', '0p9T', '1p0T', '1p1T', '1p3T','1p5T','2p0T']
+graphs = [Hists_Graph("Muon and Anti Muon Momentum corresponding to K.E 0-1000", "Signed Distance ;True signed distance(mm); Number of muons"),
+               Hists_Graph("Muon and Anti Muon Momentum corresponding to K.E 1000-2000","Signed Distance ;True signed distance(mm); Number of muons"),
+               Hists_Graph("Muon and Anti Muon Momentum corresponding to K.E 2000-3000", "Signed Distance ;True signed distance(mm); Number of muons"),
+               Hists_Graph("Muon and Anti Muon Momentum corresponding to K.E 3000-4000", "Signed Distance ;True signed distance(mm); Number of muons"),
+               Hists_Graph("Muon and Anti Muon Momentum corresponding to K.E 4000-5000", "Signed Distance ;True signed distance(mm); Number of muons")]
+
+red_colors = matplotlib.cm.Reds(np.linspace(0.2, 1, len(indexes)))
+blue_colors = matplotlib.cm.Blues(np.linspace(0.2, 1, len(indexes)))
+muon_data=[{},{},{},{},{}]
+amuon_data = [{},{},{},{},{}]
+for i in loaded_data['AMUONS']:
+    print(loaded_data['MUONS'][i])
+    count = 0
+    for signed_distance,muon_ke in zip(loaded_data['MUONS'][i],loaded_data['MUONS_CORRECT'][i][1]):
+        p = Momentum(muon_ke)
+        count+=1
+        if p.get_range_index() is not None:
+            if i not in muon_data[p.get_range_index()].keys(): muon_data[p.get_range_index()][i] = []
+            muon_data[p.get_range_index()][i].append(signed_distance)
+    for signed_distance,amuon_ke in zip(loaded_data['AMUONS'][i],loaded_data['AMUONS_CORRECT'][i][1]):
+        p = Momentum(amuon_ke)
+        if p.get_range_index() is not None:
+            if i not in amuon_data[p.get_range_index()].keys(): amuon_data[p.get_range_index()][i] = []
+            amuon_data[p.get_range_index()][i].append(signed_distance)
+    print(i.split("_")[-1].split(".")[0],count)
+
+for i,(range_muon,range_amuon) in enumerate(zip(muon_data,amuon_data)):
+    # print(i)
+    names = []
+    for fname in range_muon:
+        # print(fname)
+        filtered_name = fname.split("_")[-1].split(".")[0]
+        ind = indexes.index(filtered_name)
+        # print(filtered_name)
+        graphs[i].add(np.array(range_muon[fname]),color=red_colors[ind])
+        graphs[i].add(np.array(range_amuon[fname]),color=blue_colors[ind])
+        # names.append("AMuon " + filtered_name)
+        # names.append("Muon " + filtered_name)
+
+    # graphs[i].finish(names)
+    graphs[i].save(f"Momentum_Ranges/{graphs[i].title}.jpg")
+

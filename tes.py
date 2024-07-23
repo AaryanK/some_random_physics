@@ -1,29 +1,20 @@
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import cm
+plt.close("all")
 
-# Generate some example data
-data1 = np.random.rand(10, 12)  # Random data for first heatmap
-data2 = np.random.rand(10, 12)  # Random data for second heatmap
+blues = plt.colormaps.get_cmap('Blues', 10)
 
-# Create a figure with subplots
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
+fig, ax = plt.subplots()
 
-# Plot the first heatmap (blue colormap)
-heatmap1 = ax1.imshow(data1, cmap='Blues')
-ax1.set_title('Heatmap 1 (Blue Colormap)')
-ax1.set_xlabel('X axis')
-ax1.set_ylabel('Y axis')
-fig.colorbar(heatmap1, ax=ax1, orientation='vertical')
+l1 = np.array([1,2,3,4,5,6,7,8,9,10])
+j=0
+xaxis = np.linspace(0.5,1, 1000)
+for i in range(0,10):
+    l0 = l1*i
+    print(l0)
+    ax.plot(l1, l0,color = blues(xaxis[j]),label='plot')
+    j+=1
+    ax.legend()
 
-# Plot the second heatmap (red colormap)
-heatmap2 = ax2.imshow(data2, cmap='Reds')
-ax2.set_title('Heatmap 2 (Red Colormap)')
-ax2.set_xlabel('X axis')
-ax2.set_ylabel('Y axis')
-fig.colorbar(heatmap2, ax=ax2, orientation='vertical')
-
-# Adjust layout to prevent overlap
-plt.tight_layout()
-
-# Display the plot
 plt.show()

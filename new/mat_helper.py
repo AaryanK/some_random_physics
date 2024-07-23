@@ -3,6 +3,7 @@ import numpy as np
 
 class Hists_Graph():
     def __init__(self,Title,xy):
+        self.title = Title
         x,y = xy.split(";")[0],xy.split(";")[2]
         plt.title(Title, fontsize=15, fontweight='bold', color='purple')
         plt.xlabel(x)
