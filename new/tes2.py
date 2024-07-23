@@ -44,24 +44,24 @@ def region2(x):
 def region3(x):
     return 2500 < x < 4000
 
-with open("python_object (17).sushil_dai", 'rb') as file:
+with open("python_object (18).sushil_dai", 'rb') as file:
     loaded_data = pickle.load(file)
 
 # muon_graph = Hists_Graph("Muons Correct TMS", "TMSMomentumStart ;True signed distance(mm); Fraction")
 # num_colors = 10
 indexes = ['0p0T','0p5T', '0p7T', '0p9T', '1p0T', '1p1T', '1p3T','1p5T','2p0T']
-graphs = [Hists_Graph("Muon and Anti Muon Momentum corresponding to K.E 0-1000", "Signed Distance ;True signed distance(mm); Number of muons"),
-               Hists_Graph("Muon and Anti Muon Momentum corresponding to K.E 1000-2000","Signed Distance ;True signed distance(mm); Number of muons"),
-               Hists_Graph("Muon and Anti Muon Momentum corresponding to K.E 2000-3000", "Signed Distance ;True signed distance(mm); Number of muons"),
-               Hists_Graph("Muon and Anti Muon Momentum corresponding to K.E 3000-4000", "Signed Distance ;True signed distance(mm); Number of muons"),
-               Hists_Graph("Muon and Anti Muon Momentum corresponding to K.E 4000-5000", "Signed Distance ;True signed distance(mm); Number of muons")]
+graphs = [["Muon and Anti Muon Momentum corresponding to K.E 0-1000", "Signed Distance ;True signed distance(mm); Number of muons"],
+               ["Muon and Anti Muon Momentum corresponding to K.E 1000-2000","Signed Distance ;True signed distance(mm); Number of muons"],
+               ["Muon and Anti Muon Momentum corresponding to K.E 2000-3000", "Signed Distance ;True signed distance(mm); Number of muons"],
+               ["Muon and Anti Muon Momentum corresponding to K.E 3000-4000", "Signed Distance ;True signed distance(mm); Number of muons"],
+               ["Muon and Anti Muon Momentum corresponding to K.E 4000-5000", "Signed Distance ;True signed distance(mm); Number of muons"]]
 
 red_colors = matplotlib.cm.Reds(np.linspace(0.2, 1, len(indexes)))
-blue_colors = matplotlib.cm.Blues(np.linspace(0.2, 1, len(indexes)))
+blue_colors = matplotlib.cm.Blues(np.linspace(0.05, 1, len(indexes)))
 muon_data=[{},{},{},{},{}]
 amuon_data = [{},{},{},{},{}]
 for i in loaded_data['AMUONS']:
-    print(loaded_data['MUONS'][i])
+    # print(loaded_data['MUONS'][i])
     count = 0
     for signed_distance,muon_ke in zip(loaded_data['MUONS'][i],loaded_data['MUONS_CORRECT'][i][1]):
         p = Momentum(muon_ke)
@@ -77,18 +77,21 @@ for i in loaded_data['AMUONS']:
     print(i.split("_")[-1].split(".")[0],count)
 
 for i,(range_muon,range_amuon) in enumerate(zip(muon_data,amuon_data)):
-    # print(i)
+    g = Hists_Graph(graphs[i][0],graphs[i][1])
     names = []
     for fname in range_muon:
         # print(fname)
         filtered_name = fname.split("_")[-1].split(".")[0]
+        print(filtered_name)
         ind = indexes.index(filtered_name)
         # print(filtered_name)
-        graphs[i].add(np.array(range_muon[fname]),color=red_colors[ind])
-        graphs[i].add(np.array(range_amuon[fname]),color=blue_colors[ind])
+
+        g.add(np.array(range_muon[fname]),color=red_colors[ind])
+        if fname in range_amuon.keys():
+            g.add(np.array(range_amuon[fname]),color=blue_colors[ind])
         # names.append("AMuon " + filtered_name)
         # names.append("Muon " + filtered_name)
 
     # graphs[i].finish(names)
-    graphs[i].save(f"Momentum_Ranges/{graphs[i].title}.jpg")
+    g.save(f"Momentum_Ranges/{g.title}.jpg")
 

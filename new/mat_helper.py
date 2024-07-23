@@ -5,7 +5,7 @@ class Hists_Graph():
     def __init__(self,Title,xy):
         self.title = Title
         x,y = xy.split(";")[0],xy.split(";")[2]
-        plt.title(Title, fontsize=15, fontweight='bold', color='purple')
+        plt.title(Title,fontweight='bold')
         plt.xlabel(x)
         plt.ylabel(y)
 
@@ -41,6 +41,8 @@ class Hists_Graph():
         
     def save(self,f):
         plt.savefig(f)
+        # plt.title(self.title)
+        plt.close()
 
     def step(self,x,y):
         plt.step(x, y, where='mid', label='Efficiency',bins=100)
