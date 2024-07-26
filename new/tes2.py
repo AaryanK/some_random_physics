@@ -44,7 +44,7 @@ def region2(x):
 def region3(x):
     return 2500 < x < 4000
 
-with open("python_object (18).sushil_dai", 'rb') as file:
+with open("python_object (20).sushil_dai", 'rb') as file:
     loaded_data = pickle.load(file)
 
 # muon_graph = Hists_Graph("Muons Correct TMS", "TMSMomentumStart ;True signed distance(mm); Fraction")
@@ -56,8 +56,8 @@ graphs = [["Muon and Anti Muon Momentum corresponding to K.E 0-1000", "Signed Di
                ["Muon and Anti Muon Momentum corresponding to K.E 3000-4000", "Signed Distance ;True signed distance(mm); Number of muons"],
                ["Muon and Anti Muon Momentum corresponding to K.E 4000-5000", "Signed Distance ;True signed distance(mm); Number of muons"]]
 
-red_colors = matplotlib.cm.Reds(np.linspace(0.2, 1, len(indexes)))
-blue_colors = matplotlib.cm.Blues(np.linspace(0.05, 1, len(indexes)))
+red_colors = matplotlib.cm.Reds(np.linspace(0.3, 1, len(indexes)))
+blue_colors = matplotlib.cm.Blues(np.linspace(0.3, 1, len(indexes)))
 muon_data=[{},{},{},{},{}]
 amuon_data = [{},{},{},{},{}]
 for i in loaded_data['AMUONS']:
@@ -78,7 +78,8 @@ for i in loaded_data['AMUONS']:
 
 for i,(range_muon,range_amuon) in enumerate(zip(muon_data,amuon_data)):
     g = Hists_Graph(graphs[i][0],graphs[i][1])
-    names = []
+    anames = []
+    mnames = []
     for fname in range_muon:
         # print(fname)
         filtered_name = fname.split("_")[-1].split(".")[0]
@@ -86,12 +87,16 @@ for i,(range_muon,range_amuon) in enumerate(zip(muon_data,amuon_data)):
         ind = indexes.index(filtered_name)
         # print(filtered_name)
 
-        g.add(np.array(range_muon[fname]),color=red_colors[ind])
+        g.add(np.array(range_muon[fname]),name="Muon "+filtered_name,color=red_colors[ind],alpha=0.9)
+        mnames.append("Muon " + filtered_name)
         if fname in range_amuon.keys():
-            g.add(np.array(range_amuon[fname]),color=blue_colors[ind])
-        # names.append("AMuon " + filtered_name)
-        # names.append("Muon " + filtered_name)
+            g.add(np.array(range_amuon[fname]),name="Amuon "+filtered_name,color=blue_colors[ind],alpha=0.9)
+            anames.append("AMuon " + filtered_name)
+        # mnames.append("Muon " + filtered_name)
 
-    # graphs[i].finish(names)
+    # if 
+    g.finish(anames,handle="Amuon "+filtered_name,loc="upper right")
+    g.finish(mnames,handle="Muon "+filtered_name,loc="upper left")
+
     g.save(f"Momentum_Ranges/{g.title}.jpg")
 

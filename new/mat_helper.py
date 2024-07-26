@@ -5,15 +5,18 @@ class Hists_Graph():
     def __init__(self,Title,xy):
         self.title = Title
         x,y = xy.split(";")[0],xy.split(";")[2]
+        self.fig,self.ax = plt.subplots()
         plt.title(Title,fontweight='bold')
-        plt.xlabel(x)
-        plt.ylabel(y)
+        self.ax.set_xlabel(x)
+        self.ax.set_ylabel(y)
+        self.figures = {}
 
-    def add(self,x,color=None,ylim=None,bins=None):
+    def add(self,x,name,color=None,alpha=None,ylim=None,bins=None):
         # Create a histogram with 200 bins
-        plt.hist(x,histtype="step",color=color,bins=bins)   
+        self.figures[name] = self.ax.hist(x,histtype="step",color=color,bins=bins,alpha=alpha)   
         # plt.hist(x,bins=100,color=color)   
-        plt.xlim(-2000, 2000)
+        # self.figures[name].ax.xlim(-2000, 2000)
+        print(self.figures.keys())
         
 
     def make_bar(self,bin_centers,hist_ratio,width,color,alpha):
@@ -26,8 +29,9 @@ class Hists_Graph():
     def scatter(self,x,y,color=None):
         plt.scatter(x,y)
         
-    def finish(self,f):
-        plt.legend(f,loc="upper right")
+    def finish(self,f,handle,loc=None):
+        # self.ax.legend(f,handles=[self.figures[handle]],loc=loc)
+        return 
     
     def add_plot(self,x,y):
         plt.plot(x,y)
